@@ -1,14 +1,14 @@
 version: "3.9"
 services:
-  app:
-    build: ./app
-    container_name: app-container
-    tty: true
-    working_dir: /__work/app
-    volumes:
-      - ./app:/__work/app
-    ports:
-      - 8080:8080
+  # app:
+  #   build: ./app
+  #   container_name: app-container
+  #   tty: true
+  #   working_dir: /__work/app
+  #   volumes:
+  #     - ./app:/__work/app
+  #   ports:
+  #     - 8080:8080
 
   db:
     build: ./external/db
