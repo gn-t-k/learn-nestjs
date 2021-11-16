@@ -13,7 +13,7 @@ interface RebuildTask {
 
 export class Task {
   private constructor(
-    private readonly id: string,
+    public readonly id: string,
     public readonly title: string,
     public readonly content: string,
   ) {}

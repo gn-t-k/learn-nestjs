@@ -63,7 +63,7 @@ export class TaskController {
     }
   }
 
-  @Patch(':id')
+  @Patch()
   async update(@Body() updateTaskDto: UpdateTaskDto) {
     try {
       return await this.taskService.update(updateTaskDto);
