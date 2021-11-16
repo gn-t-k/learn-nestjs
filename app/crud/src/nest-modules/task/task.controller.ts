@@ -22,21 +22,21 @@ export class TaskController {
 
   @Get()
   findAll() {
-    return this.taskService.findAll();
+    return this.taskService.getAllTask();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.taskService.findOne(+id);
+    return this.taskService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
-    return this.taskService.update(+id, updateTaskDto);
+  update(@Body() updateTaskDto: UpdateTaskDto) {
+    return this.taskService.update(updateTaskDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.taskService.remove(+id);
+    return this.taskService.remove(id);
   }
 }
