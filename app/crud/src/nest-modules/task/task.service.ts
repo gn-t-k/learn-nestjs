@@ -4,12 +4,8 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 import {
   ITaskRepository,
   TASK_REPOSITORY,
-} from '../../domains/task/task.repository.interface';
-import { createTask } from 'src/domains/task/usecases/create-task';
-import { Task } from 'src/domains/task/task.entity';
-import { getAllTask } from 'src/domains/task/usecases/get-all-task';
-import { findTask } from 'src/domains/task/usecases/find-task';
-import { updateTask } from 'src/domains/task/usecases/update-task';
+} from 'src/domains/task/task.repository.interface';
+import * as Usecase from 'src/domains/task/usecases';
 
 @Injectable()
 export class TaskService {
@@ -18,25 +14,24 @@ export class TaskService {
     private readonly taskRepository: ITaskRepository,
   ) {}
 
-  create = async (createTaskDto: CreateTaskDto) => {
+  public create = async (createTaskDto: CreateTaskDto) => {
     const { title, content } = createTaskDto;
-    const task = Task.create({ title, content });
 
-    await createTask(task, this.taskRepository);
+    await Usecase.create(this.taskRepository)({ title, content });
   };
 
-  getAllTask = async () => await getAllTask(this.taskRepository);
+  public findOne = async (id: string) =>
+    await Usecase.findOne(this.taskRepository)({ id });
 
-  findTask = async (id: string) => await findTask(id, this.taskRepository);
+  public getAll = async () => await Usecase.getAll(this.taskRepository)();
 
-  update = async (updateTaskDto: UpdateTaskDto) => {
+  public update = async (updateTaskDto: UpdateTaskDto) => {
     const { id, title, content } = updateTaskDto;
-    const task = Task.rebuild({ id, title, content });
 
-    updateTask(task, this.taskRepository);
+    await Usecase.update(this.taskRepository)({ id, title, content });
   };
 
-  remove = async (id: string) => {
-    await this.taskRepository.remove(id);
+  public remove = async (id: string) => {
+    await Usecase.remove(this.taskRepository)({ id });
   };
 }
