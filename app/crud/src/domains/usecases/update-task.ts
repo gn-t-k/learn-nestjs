@@ -1,5 +1,5 @@
-import { Task } from '../task.entity';
-import { ITaskRepository } from '../task.repository.interface';
+import { Task } from '../task/task.entity';
+import { ITaskRepository } from '../task/task.repository.interface';
 
 interface IProps {
   id: string;
@@ -7,7 +7,7 @@ interface IProps {
   content?: string;
 }
 
-export const update =
+export const updateTask =
   (repository: ITaskRepository) =>
   async ({ id, title, content }: IProps) => {
     const storedTask = await repository.findOne(id);

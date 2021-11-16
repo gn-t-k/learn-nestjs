@@ -5,7 +5,7 @@ import {
   ITaskRepository,
   TASK_REPOSITORY,
 } from 'src/domains/task/task.repository.interface';
-import * as Usecase from 'src/domains/task/usecases';
+import * as Usecase from 'src/domains/usecases';
 
 @Injectable()
 export class TaskService {
@@ -17,21 +17,21 @@ export class TaskService {
   public create = async (createTaskDto: CreateTaskDto) => {
     const { title, content } = createTaskDto;
 
-    await Usecase.create(this.taskRepository)({ title, content });
+    await Usecase.createTask(this.taskRepository)({ title, content });
   };
 
   public findOne = async (id: string) =>
-    await Usecase.findOne(this.taskRepository)({ id });
+    await Usecase.findTask(this.taskRepository)({ id });
 
-  public getAll = async () => await Usecase.getAll(this.taskRepository)();
+  public getAll = async () => await Usecase.getAllTask(this.taskRepository)();
 
   public update = async (updateTaskDto: UpdateTaskDto) => {
     const { id, title, content } = updateTaskDto;
 
-    await Usecase.update(this.taskRepository)({ id, title, content });
+    await Usecase.updateTask(this.taskRepository)({ id, title, content });
   };
 
   public remove = async (id: string) => {
-    await Usecase.remove(this.taskRepository)({ id });
+    await Usecase.removeTask(this.taskRepository)({ id });
   };
 }

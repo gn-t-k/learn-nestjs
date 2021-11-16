@@ -1,10 +1,10 @@
-import { ITaskRepository } from '../task.repository.interface';
+import { ITaskRepository } from '../task/task.repository.interface';
 
 interface IProps {
   id: string;
 }
 
-export const remove =
+export const removeTask =
   (repository: ITaskRepository) =>
   async ({ id }: IProps) => {
     const storedTask = await repository.findOne(id);
